@@ -95,6 +95,10 @@ public class ContributorsFragment extends BaseFragment implements ContributorsVi
         return getResources().getInteger(R.integer.contributors_columns);
     }
 
+    public void onClickRepositoryMenu() {
+        viewModel.onClickRepositoryMenu();
+    }
+
     private static class Adapter
             extends ArrayRecyclerAdapter<ContributorViewModel, BindingHolder<ViewContributorCellBinding>> {
 

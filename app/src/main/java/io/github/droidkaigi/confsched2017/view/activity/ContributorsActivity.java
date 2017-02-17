@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import io.github.droidkaigi.confsched2017.R;
 import io.github.droidkaigi.confsched2017.databinding.ActivityContributorsBinding;
 import io.github.droidkaigi.confsched2017.view.fragment.ContributorsFragment;
-import io.github.droidkaigi.confsched2017.view.helper.Navigator;
 import io.github.droidkaigi.confsched2017.viewmodel.ToolbarViewModel;
 
 public class ContributorsActivity extends BaseActivity {
@@ -23,8 +22,7 @@ public class ContributorsActivity extends BaseActivity {
     @Inject
     ToolbarViewModel viewModel;
 
-    @Inject
-    Navigator navigator;
+    private ContributorsFragment fragment;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, ContributorsActivity.class);
@@ -40,7 +38,8 @@ public class ContributorsActivity extends BaseActivity {
 
         initBackToolbar(binding.toolbar);
         viewModel.setToolbarTitle(getString(R.string.contributors));
-        replaceFragment(ContributorsFragment.newInstance(), R.id.content_view);
+        fragment = ContributorsFragment.newInstance();
+        replaceFragment(fragment, R.id.content_view);
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ContributorsActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_repository:
-                navigator.navigateToWebPage("https://github.com/DroidKaigi/conference-app-2017");
+                fragment.onClickRepositoryMenu();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
